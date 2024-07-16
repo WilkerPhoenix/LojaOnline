@@ -4,10 +4,8 @@
  */
 package model;
 
-/**
- *
- * @author Wilke
- */
-public class Pagamento {
-    
+public interface Pagamento {
+    void processarPagamento(double quantia);
 }
+
+
