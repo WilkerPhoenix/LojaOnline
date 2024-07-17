@@ -1,37 +1,30 @@
 package model;
 
-/**
- *
- * @author Wilker
- */
 public class Produto {
-    private String descricao;
-    private String preco;
-    private int qtdEstoque;
+    private String nome;
+    private double preco;
+    private int quantidadeEstoque;
 
-    public String getDescricao() {
-        return descricao;
+    public Produto(String nome, double preco, int quantidadeEstoque) {
+        this.nome = nome;
+        this.preco = preco;
+        this.quantidadeEstoque = quantidadeEstoque;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public String getNome() {
+        return nome;
     }
 
-    public String getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(String preco) {
-        this.preco = preco;
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
     }
 
-    public int getQtdEstoque() {
-        return qtdEstoque;
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
     }
-
-    public void setQtdEstoque(int qtdEstoque) {
-        this.qtdEstoque = qtdEstoque;
-    }
-    
-    
 }
+

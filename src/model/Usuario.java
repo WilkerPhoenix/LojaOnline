@@ -1,9 +1,5 @@
 package model;
 
-/**
- *
- * @author Wilker
- */
 public abstract class Usuario {
     private String nome;
     private String login;

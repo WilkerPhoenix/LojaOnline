@@ -1,3 +1,5 @@
+package model;
+
 public class PagTransferenciaBancaria implements Pagamento {
     @Override
     public void processarPagamento(double quantia) {

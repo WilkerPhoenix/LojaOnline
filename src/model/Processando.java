@@ -1,3 +1,5 @@
+package model;
+
 public class Processando implements PedidoState {
     @Override
     public void proximoEstado(Pedido pedido) {

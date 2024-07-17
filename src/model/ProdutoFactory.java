@@ -1,3 +1,5 @@
+package model;
+
 public class ProdutoFactory {
     public static Produto criarProduto(String tipo, String nome, double preco, int quantidadeEstoque) {
         switch (tipo.toLowerCase()) {
