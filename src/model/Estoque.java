@@ -8,7 +8,7 @@ public class Estoque {
     public List<Produto> listaDeProdutos;
 
     //construtor privado para criar a instância única.
-    private Estoque() {
+    Estoque() {
         listaDeProdutos = new ArrayList<>();
 
     }
