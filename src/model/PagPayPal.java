@@ -2,8 +2,8 @@ package model;
 
 public class PagPayPal implements Pagamento {
     @Override
-    public void processarPagamento(double quantia) {
-        // falta
-        System.out.println("Pagamento de " + quantia + " processado via PayPal.");
+    public boolean processarPagamento(double quantia, String nome, String dadosPagamento) {
+        //Colocar na interface um botão para confirma o pagamento
+        return true;
     }
 }
