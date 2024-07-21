@@ -6,11 +6,15 @@ public class Pedido {
     private List<Produto> produtos;
     private PedidoState estado;
     private Pagamento metodoPagamento;
+    private String nomeCliente;
+    private String dadosPagamento;
 
-    public Pedido(List<Produto> produtos, Pagamento metodoPagamento) {
+    public Pedido(List<Produto> produtos, Pagamento metodoPagamento, String nomeCliente, String dadosPagamento) {
         this.produtos = produtos;
         this.estado = new Novo();
         this.metodoPagamento = metodoPagamento;
+        this.nomeCliente = nomeCliente;
+        this.dadosPagamento = dadosPagamento;
     }
 
     public void proximoEstado() {
@@ -31,12 +35,11 @@ public class Pedido {
 
     public double calcularPrecoTotal() {
         return produtos.stream()
-                .mapToDouble(Produto::getPreco)
+                .mapToDouble(produto -> produto.getPreco() * produto.getQuantidadeEstoque())
                 .sum();
     }
 
-    public void processarPagamento() {
-        metodoPagamento.processarPagamento(calcularPrecoTotal());
+    public boolean processarPagamento() {
+        return metodoPagamento.processarPagamento(calcularPrecoTotal(), nomeCliente, dadosPagamento);
     }
-
 }
