@@ -19,7 +19,7 @@ public class CarrinhoTest {
     @Test
     public void testAdicionarProduto() {
         carrinho.adicionarProduto(celular, 1);
-        assertEquals(1, carrinho.getItens().get(celular.getClass()));
+        assertEquals(1, carrinho.getItens().get(celular).intValue());
     }
 
     @Test
