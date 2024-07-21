@@ -40,14 +40,11 @@ public class Carrinho {
                 .sum();
     }
 
-    public <T> ClassValue<T> getItens() {
-        return (ClassValue<T>) itens;
+    public Map<Produto, Integer> getItens() {
+        return itens;
     }
 
-    public void setItens(ClassValue<Produto> itens) {
-        this.itens = (Map<Produto, Integer>) itens;
+    public void setItens(Map<Produto, Integer> itens) {
+        this.itens = itens;
     }
-
-    // talvez mais getters
 }
-
