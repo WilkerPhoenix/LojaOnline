@@ -1,5 +1,5 @@
 package model;
 
 public interface Pagamento {
-    void processarPagamento(double quantia);
+    boolean processarPagamento(double quantia, String nome, String dadosPagamento);
 }
