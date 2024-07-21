@@ -29,9 +29,13 @@ class EstoqueTest {
     void add() {
         estoque.listaDeProdutos.add(roupa);
         assertEquals("Roupa", estoque.listaDeProdutos.getLast().getNome());
+        assertEquals(100.00, estoque.listaDeProdutos.getLast().getPreco());
+        assertEquals(5, estoque.listaDeProdutos.getLast().getQuantidadeEstoque());
 
         estoque.listaDeProdutos.add(eletronico);
         assertEquals("Celular", estoque.listaDeProdutos.getLast().getNome());
+        assertEquals(1000.00, estoque.listaDeProdutos.getLast().getPreco());
+        assertEquals(10, estoque.listaDeProdutos.getLast().getQuantidadeEstoque());
 
 
     }
