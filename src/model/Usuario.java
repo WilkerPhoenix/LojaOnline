@@ -28,7 +28,6 @@ public abstract class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    public abstract void login();
-    
-    
+
+    public abstract boolean login(String login, String senha);
 }
