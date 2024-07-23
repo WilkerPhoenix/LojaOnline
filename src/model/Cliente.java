@@ -9,13 +9,18 @@ public class Cliente extends Usuario {
         this.setSenha(senha);
         this.autenticado = false;
     }
+
     @Override
-    public void login() {
-        this.getSenha();
+    public boolean login(String login, String senha) {
+        if (this.getLogin().equals(login) && this.getSenha().equals(senha)) {
+            this.autenticado = true;
+        } else {
+            this.autenticado = false;
+        }
+        return this.autenticado;
     }
 
     public boolean isAutenticado() {
-        return true;
+        return this.autenticado;
     }
 }
-
