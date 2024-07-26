@@ -1,12 +1,17 @@
 package model;
 
+import view.ClienteView;
+import view.LojistaView;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
 public class InterfacePrincipal extends javax.swing.JFrame {
-    private Usuario usuario; //armazenar informações do usuário
+    private Usuario usuario;
+    private ClienteView cv;//armazenar informações do usuário
+    private LojistaView lv;
 
     public InterfacePrincipal() {
         initComponents();
@@ -17,7 +22,10 @@ public class InterfacePrincipal extends javax.swing.JFrame {
         String senha = new String(jPasswordField1.getPassword());
         boolean loginSucesso = usuario.login(login, senha);
         if (loginSucesso) {
-            //Outra interface entra aqui
+            if (usuario instanceof Cliente) {
+                cv = new ClienteView((Cliente) usuario);
+            }
+
         } else {
             JOptionPane.showMessageDialog(this, "Login ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -70,6 +78,7 @@ public class InterfacePrincipal extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+                cv = new ClienteView((Cliente) usuario);
             }
         });
 
@@ -165,8 +174,8 @@ public class InterfacePrincipal extends javax.swing.JFrame {
 
     private void jButtonVendedorActionPerformed(java.awt.event.ActionEvent evt) {
         // Lógica para o botão "Vendedor"
-        // Pode abrir uma nova janela ou funcionalidade do vendedor
-        JOptionPane.showMessageDialog(this, "Funcionalidade do vendedor ainda não implementada.", "Vendedor", JOptionPane.INFORMATION_MESSAGE);
+        SwingUtilities.invokeLater(LojistaView::new);
+
     }
 
     public void onCadastroCompleted(Usuario user) {

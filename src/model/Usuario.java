@@ -30,4 +30,4 @@ public abstract class Usuario {
     }
 
     public abstract boolean login(String login, String senha);
-}
+    }

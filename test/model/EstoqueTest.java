@@ -12,7 +12,7 @@ class EstoqueTest {
 
     @BeforeEach
     public void setUp() {
-        estoque = new Estoque();
+        estoque = Estoque.getInstance();
         roupa = new Produto("Roupa", 100.00, 5);
         eletronico = new Produto("Celular", 1000.00, 10);
 
@@ -20,7 +20,7 @@ class EstoqueTest {
 
     @Test
     void getInstance() {
-        estoque.getInstance();
+        Estoque.getInstance();
         assertNotNull(estoque);
 
 

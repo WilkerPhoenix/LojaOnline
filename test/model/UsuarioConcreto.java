@@ -1,9 +1,9 @@
-package model;
+/*package model;
 //Classe criada para testar o usuario, considerando que usuario é uma classe abstract
 public class UsuarioConcreto extends Usuario {
     private boolean autenticado;
 
-    public UsuarioConcreto(String nome, String login, String senha) {
+    public UsuarioConcreto(String login, String senha) {
         this.setNome(nome);
         this.setLogin(login);
         this.setSenha(senha);
@@ -22,4 +22,4 @@ public class UsuarioConcreto extends Usuario {
     public boolean isAutenticado() {
         return autenticado;
     }
-}
+}*/
