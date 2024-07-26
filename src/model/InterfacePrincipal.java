@@ -12,7 +12,21 @@ public class InterfacePrincipal extends javax.swing.JFrame {
     private Usuario usuario;
     private ClienteView cv;//armazenar informações do usuário
     private LojistaView lv;
+    private CadastroListener cadastroListener;
+    private JTextField jTextField2;
+    private JTextField jTextField3;
 
+    public interface CadastroListener {
+        void onCadastroCompleted(Usuario user);
+    }
+
+    public void setCadastroListener(CadastroListener listener) {
+        this.cadastroListener = listener;
+    }
+
+    public void Cadastro() {
+        initComponents();
+    }
     public InterfacePrincipal() {
         initComponents();
     }
@@ -34,7 +48,12 @@ public class InterfacePrincipal extends javax.swing.JFrame {
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {
         Cadastro cadastro = new Cadastro();
         cadastro.setVisible(true);
-        cadastro.setCadastroListener((Cadastro.CadastroListener) this);
+        cadastro.setCadastroListener(new Cadastro.CadastroListener() {
+            @Override
+            public void onCadastroCompleted(Usuario user) {
+                usuario = user;
+            }
+        });
     }
 
     public static void main(String args[]) {
@@ -50,6 +69,8 @@ public class InterfacePrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -165,11 +186,26 @@ public class InterfacePrincipal extends javax.swing.JFrame {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        loginActionPerformed(evt);
+        String login = jTextField1.getText();
+        String senha = jTextField2.getText();
+        String nome = jTextField3.getText();
+
+        Cliente novoCliente = new Cliente(nome, senha, login);
+
+        if (cadastroListener != null) {
+            cadastroListener.onCadastroCompleted(novoCliente);
+        }
+
+        JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
+        dispose();
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         cadastrarActionPerformed(evt);
+    }
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {
+        JOptionPane.showMessageDialog(this, "Cadastro cancelado.");
+        dispose();
     }
 
     private void jButtonVendedorActionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +214,7 @@ public class InterfacePrincipal extends javax.swing.JFrame {
 
     }
 
+   // @Override
     public void onCadastroCompleted(Usuario user) {
         usuario = user;
     }
