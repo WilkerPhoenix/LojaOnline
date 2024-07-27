@@ -1,9 +1,6 @@
 package view;
 
-import model.Cadastro;
-import model.Cliente;
-import model.Estoque;
-import model.Produto;
+import model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +20,7 @@ public class ClienteView {
     private JPanel panel;
     private JSplitPane splitPane;
     private JButton panelButton;
+    private JButton panelButton2;
 
     public ClienteView(Cliente cliente) {
         this.cliente = cliente;
@@ -30,6 +28,7 @@ public class ClienteView {
         this.estoque = Estoque.getInstance();
         Produto produto2 = new Produto("Camisa", 12, 3);
         estoque.add(produto2);
+
         frame = new JFrame("Cliente");
         model = new DefaultListModel<>();
         listProdutos = new JList<>(model);
@@ -37,6 +36,7 @@ public class ClienteView {
         panel = new JPanel();
         splitPane = new JSplitPane();
         panelButton = new JButton("Adicionar ao Carrinho");
+        panelButton2 = new JButton("Ver carrinho");
 
         for (Produto produto : estoque.listaDeProdutos) {
             model.addElement(produto);
@@ -57,20 +57,20 @@ public class ClienteView {
 
         panel.setLayout(new BorderLayout());
         panel.add(label, BorderLayout.NORTH);
-        panel.add(panelButton, BorderLayout.SOUTH);
+        panel.add(panelButton, BorderLayout.CENTER);
+        panel.add(panelButton2, BorderLayout.SOUTH);
 
-        panelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Produto selectedProduct = listProdutos.getSelectedValue();
-                if (selectedProduct != null) {
-                    listCarrinho.add(selectedProduct);
-                    JOptionPane.showMessageDialog(frame, selectedProduct.getNome() + " adicionado ao carrinho.");
-                } else {
-                    JOptionPane.showMessageDialog(frame, "Nenhum produto selecionado.");
-                }
+        panelButton.addActionListener(e -> {
+            Produto selectedProduct = listProdutos.getSelectedValue();
+            if (selectedProduct != null) {
+                listCarrinho.add(selectedProduct);
+                JOptionPane.showMessageDialog(frame, selectedProduct.getNome() + " adicionado ao carrinho.");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Nenhum produto selecionado.");
             }
         });
+
+        panelButton2.addActionListener(e -> mostrarCarrinho());
 
         splitPane.setLeftComponent(new JScrollPane(listProdutos));
         splitPane.setRightComponent(panel);
@@ -82,13 +82,15 @@ public class ClienteView {
         frame.setVisible(true);
     }
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            Cliente cliente = new Cliente("joao", "joao", "1234");
+    private void mostrarCarrinho() {
+        CarrinhoTela carrinhoTela = new CarrinhoTela(listCarrinho);
+        carrinhoTela.setVisible(true);
+    }
 
-            public void run() {
-                new ClienteView(cliente);
-            }
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(() -> {
+            Cliente cliente = new Cliente("joao", "joao", "1234");
+            new ClienteView(cliente);
         });
     }
 }
