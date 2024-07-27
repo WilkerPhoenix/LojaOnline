@@ -26,10 +26,5 @@ public  class Produto {
     public void setQuantidadeEstoque(int quantidadeEstoque) {
         this.quantidadeEstoque = quantidadeEstoque;
     }
-    @Override
-    public String toString()
-    {
-        return this.nome;
-    }
 }
 

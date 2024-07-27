@@ -1,32 +1,13 @@
 package model;
 
-import view.ClienteView;
-import view.LojistaView;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
 public class InterfacePrincipal extends javax.swing.JFrame {
-    private Usuario usuario;
-    private ClienteView cv;//armazenar informações do usuário
-    private LojistaView lv;
-    private CadastroListener cadastroListener;
-    private JTextField jTextField2;
-    private JTextField jTextField3;
+    private Usuario usuario; //armazenar informações do usuário
 
-    public interface CadastroListener {
-        void onCadastroCompleted(Usuario user);
-    }
-
-    public void setCadastroListener(CadastroListener listener) {
-        this.cadastroListener = listener;
-    }
-
-    public void Cadastro() {
-        initComponents();
-    }
     public InterfacePrincipal() {
         initComponents();
     }
@@ -36,10 +17,7 @@ public class InterfacePrincipal extends javax.swing.JFrame {
         String senha = new String(jPasswordField1.getPassword());
         boolean loginSucesso = usuario.login(login, senha);
         if (loginSucesso) {
-            if (usuario instanceof Cliente) {
-                cv = new ClienteView((Cliente) usuario);
-            }
-
+            //Outra interface entra aqui
         } else {
             JOptionPane.showMessageDialog(this, "Login ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -48,12 +26,7 @@ public class InterfacePrincipal extends javax.swing.JFrame {
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {
         Cadastro cadastro = new Cadastro();
         cadastro.setVisible(true);
-        cadastro.setCadastroListener(new Cadastro.CadastroListener() {
-            @Override
-            public void onCadastroCompleted(Usuario user) {
-                usuario = user;
-            }
-        });
+        cadastro.setCadastroListener((Cadastro.CadastroListener) this);
     }
 
     public static void main(String args[]) {
@@ -69,8 +42,6 @@ public class InterfacePrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -99,7 +70,6 @@ public class InterfacePrincipal extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-                cv = new ClienteView((Cliente) usuario);
             }
         });
 
@@ -186,35 +156,19 @@ public class InterfacePrincipal extends javax.swing.JFrame {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        String login = jTextField1.getText();
-        String senha = jTextField2.getText();
-        String nome = jTextField3.getText();
-
-        Cliente novoCliente = new Cliente(nome, senha, login);
-
-        if (cadastroListener != null) {
-            cadastroListener.onCadastroCompleted(novoCliente);
-        }
-
-        JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
-        dispose();
+        loginActionPerformed(evt);
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         cadastrarActionPerformed(evt);
     }
-    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {
-        JOptionPane.showMessageDialog(this, "Cadastro cancelado.");
-        dispose();
-    }
 
     private void jButtonVendedorActionPerformed(java.awt.event.ActionEvent evt) {
         // Lógica para o botão "Vendedor"
-        SwingUtilities.invokeLater(LojistaView::new);
-
+        // Pode abrir uma nova janela ou funcionalidade do vendedor
+        JOptionPane.showMessageDialog(this, "Funcionalidade do vendedor ainda não implementada.", "Vendedor", JOptionPane.INFORMATION_MESSAGE);
     }
 
-   // @Override
     public void onCadastroCompleted(Usuario user) {
         usuario = user;
     }

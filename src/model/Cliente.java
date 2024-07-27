@@ -11,7 +11,7 @@ public class Cliente extends Usuario {
     }
 
     @Override
-    public boolean login(String senha, String login) {
+    public boolean login(String login, String senha) {
         if (this.getLogin().equals(login) && this.getSenha().equals(senha)) {
             this.autenticado = true;
         } else {
