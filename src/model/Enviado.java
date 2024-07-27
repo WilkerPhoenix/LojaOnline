@@ -16,7 +16,5 @@ public class Enviado implements PedidoState {
     public String getEstado() {
         return "Enviado";
     }
-    //falta implementar os 3 métodos abstratos.
-
 
 }

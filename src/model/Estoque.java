@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Estoque {
-    private Estoque instance;
-    public List<Produto> listaDeProdutos;
+    private static Estoque instance;
+    public List<Produto> listaDeProdutos = new ArrayList<>();
 
-    //construtor privado para criar a instância única.
-    Estoque() {
-        listaDeProdutos = new ArrayList<>();
 
+    private Estoque() {
     }
 
-    public Estoque getInstance() {
+
+    public static synchronized Estoque getInstance() {
         if (instance == null) {
             instance = new Estoque();
         }
         return instance;
-
     }
 
-
+    public void add(Produto produto) {
+        listaDeProdutos.add(produto);
+    }
 }
